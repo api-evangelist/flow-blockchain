@@ -1,0 +1,79 @@
+name: Flow Blockchain FinOps
+description: >-
+  Flow does not charge for API access itself. The primary costs on the Flow
+  blockchain are transaction fees, paid in FLOW tokens, based on compute units
+  (CU) consumed by each transaction. Read-only operations such as querying
+  blocks, accounts, events, and executing Cadence scripts are free. Storage fees
+  apply as a reserved balance requirement proportional to the data stored in an
+  account.
+costs:
+  - type: transaction-fees
+    description: >-
+      Transaction fees are paid in FLOW tokens and calculated by multiplying
+      the total compute units consumed by the current compute-unit price. Fees
+      consist of an execution fee (variable, based on code complexity and storage
+      I/O), a fixed inclusion fee, and a surge factor applied during congestion.
+    currency: FLOW
+    model: compute-units
+    examples:
+      - operation: Empty transaction
+        computeUnits: 0
+        approximateUSDCost: "$0.0001"
+      - operation: Fungible token transfer
+        computeUnits: 19
+        approximateUSDCost: "$0.00086"
+      - operation: Mint small NFT
+        computeUnits: 25
+        approximateUSDCost: "$0.0011"
+      - operation: Create new account
+        computeUnits: 45
+        approximateUSDCost: "$0.0019"
+      - operation: Deploy contract (~50 KB)
+        computeUnits: 319
+        approximateUSDCost: "$0.0129"
+    notes: >-
+      All fees approximate and based on current compute-unit price. Fees apply
+      regardless of transaction success or failure. A payer account with
+      insufficient FLOW balance will cause the transaction to fail.
+  - type: inclusion-fee
+    description: Fixed per-transaction fee covering inclusion in a block, node-to-node transport, and signature verification.
+    amount: 0.0001
+    currency: FLOW
+    model: fixed
+  - type: storage-fees
+    description: >-
+      Flow uses a reserve-based storage model. Accounts must maintain a minimum
+      FLOW balance proportional to the data they store. The balance is not
+      spent — it is reserved and returned if storage is freed.
+    currency: FLOW
+    model: reserve-based
+    rates:
+      - storage: 100 MB
+        reservedBalance: "1 FLOW"
+      - storage: minimum account
+        reservedBalance: "0.001 FLOW"
+    notes: >-
+      Transactions fail if they would reduce an account balance below 0.001 FLOW
+      or cause the account to exceed its storage capacity.
+  - type: api-access
+    description: The public Flow REST API via community access nodes is free with no subscription or usage fees.
+    amount: 0
+    currency: USD
+    model: free
+    notes: >-
+      Third-party providers such as QuickNode offer paid plans for higher
+      throughput and SLA guarantees. Running a private access node incurs
+      infrastructure costs only.
+optimization:
+  - Minimize unnecessary function calls in Cadence to reduce execution effort
+  - Limit loop iterations to required subsets
+  - Use reference borrowing instead of load/save operations
+  - Create accounts and add keys only when necessary
+  - Use the Flow emulator or testnet to measure compute units before deploying to mainnet
+references:
+  - title: Flow Transaction Fees Documentation
+    url: https://developers.flow.com/build/cadence/basics/fees
+  - title: FLIP 351 - Transaction Fee Update
+    url: https://github.com/onflow/flips/blob/main/governance/20251119-transaction-fee-update.md
+  - title: FLIP 336 - Dynamic Transaction Fees
+    url: https://github.com/onflow/flips/blob/main/governance/20250727-dynamic-transaction-fees.md

@@ -1,0 +1,50 @@
+name: Flow Access API Rate Limits
+description: >-
+  The Flow public community access nodes enforce per-IP rate limits on both the
+  gRPC and REST APIs separately. Limits specify the maximum number of requests
+  per second (RPS) a unique client IP can make to any particular API endpoint.
+  When a limit is exceeded the API returns a ResourceExhausted error. Developers
+  should handle this error gracefully and consider exponential backoff or
+  migrating to a private access node or third-party provider for production
+  workloads.
+rateLimits:
+  - endpoint: SendTransaction (POST /transactions)
+    limitRPS: 50
+    unit: requests-per-second
+    scope: per-client-ip
+    notes: >-
+      Rate limit was phased down from 2000 RPS in August 2023 to the current
+      50 RPS as of September 2023.
+  - endpoint: ExecuteScript (POST /scripts)
+    limitRPS: 5
+    unit: requests-per-second
+    scope: per-client-ip
+    notes: >-
+      All ExecuteScript variants share this limit. Reduced from 100 RPS in
+      August 2023 to 5 RPS by September 2023.
+  - endpoint: GetEvents (GET /events)
+    limitRPS: 30
+    unit: requests-per-second
+    scope: per-client-ip
+    notes: Reduced from 100 RPS in August 2023 to 30 RPS by September 2023.
+  - endpoint: Other GET requests (blocks, transactions, accounts, collections, etc.)
+    limitRPS: 100
+    unit: requests-per-second
+    scope: per-client-ip
+    notes: >-
+      Covers all other read endpoints including /blocks, /transactions,
+      /accounts, /collections, /execution_results, /execution_receipts,
+      /network/parameters, and /node_version_info. Reduced from 2000 RPS in
+      August 2023 to 100 RPS by September 2023.
+errorHandling:
+  errorType: ResourceExhausted
+  httpStatus: 429
+  recommendation: >-
+    Implement exponential backoff. For sustained high-throughput requirements
+    consider running a private access node or subscribing to a third-party
+    provider such as QuickNode.
+references:
+  - title: Flow Community Forum - Access API Rate Limits Rollout
+    url: https://forum.flow.com/t/plan-to-roll-out-access-api-rate-limits-changes-on-flow-mainnet-starting-wednesday-8-16/5107
+  - title: Flow Node Operator Docs
+    url: https://developers.flow.com/networks/node-ops

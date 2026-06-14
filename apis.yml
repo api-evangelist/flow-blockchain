@@ -1,0 +1,60 @@
+name: Flow
+description: >-
+  Flow is a developer-friendly Layer 1 proof-of-stake blockchain built for
+  consumer applications, NFTs, games, AI agents, and DeFi at scale. The Flow
+  REST API (Access API) enables developers to query accounts, blocks,
+  collections, events, and transactions, execute Cadence scripts, and submit
+  signed transactions to the network. Flow supports both native Cadence smart
+  contracts and EVM-compatible Solidity deployments.
+image: https://developers.flow.com/img/flow-docs-logo.png
+tags:
+  - Blockchain
+  - NFTs
+  - Games
+  - DeFi
+  - Layer 1
+  - Cadence
+  - Smart Contracts
+  - Web3
+created: "2026-06-13"
+modified: "2026-06-13"
+url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/apis.yml
+specificationVersion: "0.19"
+apis:
+  - name: Flow Access REST API
+    description: >-
+      The Flow Access REST API provides HTTP endpoints for querying on-chain
+      data including blocks, transactions, collections, execution results,
+      accounts, and events. It also supports executing read-only Cadence scripts
+      and submitting signed transactions to the Flow network.
+    image: https://developers.flow.com/img/flow-docs-logo.png
+    humanURL: https://developers.flow.com/http-api
+    baseURL: https://rest-mainnet.onflow.org/v1
+    tags:
+      - Blockchain
+      - REST API
+      - Transactions
+      - Blocks
+      - Accounts
+      - Events
+      - Cadence
+    properties:
+      - type: Documentation
+        url: https://developers.flow.com/http-api
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/onflow/flow/master/openapi/access.yaml
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Flow Developer Support
+        url: https://developers.flow.com/community
+      - FN: Flow Discord
+        url: https://discord.gg/flow
+maintainers:
+  - FN: Kin Lane
+    X-github: kinlane
+    email: kin@apievangelist.com

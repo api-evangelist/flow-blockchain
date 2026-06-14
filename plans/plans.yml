@@ -1,0 +1,64 @@
+name: Flow Access API Plans
+description: >-
+  The Flow Access API is provided free of charge via community-operated public
+  access nodes on both Mainnet and Testnet. There are no subscription tiers or
+  paid plans for the public API. Rate limits apply per client IP to ensure fair
+  usage across the community. Developers requiring higher throughput can operate
+  their own private access nodes or use third-party node providers such as
+  QuickNode.
+plans:
+  - name: Public Community Access (Free)
+    description: >-
+      Free access to the Flow REST API via community-operated public access
+      nodes. Available for both Mainnet and Testnet. Rate limits apply per
+      client IP address. No API key or authentication required.
+    url: https://developers.flow.com/http-api
+    price: 0
+    pricingModel: free
+    authentication: none
+    endpoints:
+      - GET /blocks
+      - GET /blocks/{id}
+      - GET /blocks/{id}/payload
+      - GET /transactions/{id}
+      - GET /transaction_results/{transaction_id}
+      - GET /transaction_results
+      - POST /transactions
+      - GET /collections/{id}
+      - GET /execution_results
+      - GET /execution_results/{id}
+      - GET /execution_receipts
+      - GET /accounts/{address}
+      - GET /accounts/{address}/keys/{index}
+      - GET /accounts/{address}/keys
+      - GET /accounts/{address}/balance
+      - POST /scripts
+      - GET /events
+      - GET /network/parameters
+      - GET /node_version_info
+      - GET /subscribe_events
+    notes: >-
+      Developers exceeding the public rate limits may deploy their own private
+      access nodes following the Flow node operator documentation, or use a
+      third-party infrastructure provider.
+  - name: Private Access Node (Self-Hosted)
+    description: >-
+      Developers can run their own Flow access nodes for private, high-throughput
+      API access without the community rate limits. Requires infrastructure
+      setup and maintenance following the Flow node operator documentation.
+    url: https://developers.flow.com/networks/node-ops
+    price: variable
+    pricingModel: infrastructure-cost
+    authentication: none
+    notes: >-
+      Cost is the operational cost of running your own infrastructure. No fees
+      are paid to Flow directly for this option.
+  - name: QuickNode Managed Endpoint
+    description: >-
+      Third-party managed Flow API endpoints offered by QuickNode with
+      enterprise-grade uptime SLAs, global routing, and higher rate limits.
+      Plans range from a free tier to paid tiers with higher request volumes.
+    url: https://www.quicknode.com/chains/flow
+    price: variable
+    pricingModel: subscription
+    authentication: api-key
