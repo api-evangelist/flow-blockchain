@@ -1,0 +1,27 @@
+{
+  "header": {
+    "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+    "parent_id": "0000000000000000000000000000000000000000000000000000000000000000",
+    "height": "85000000",
+    "timestamp": "2024-01-15T12:00:00Z",
+    "parent_voter_signature": "aGVsbG93b3JsZA=="
+  },
+  "payload": {
+    "collection_guarantees": [
+      {
+        "collection_id": "b1c2d3e4f5a6b1c2d3e4f5a6b1c2d3e4f5a6b1c2d3e4f5a6b1c2d3e4f5a6b1c2",
+        "signer_ids": [
+          "c1d2e3f4a5b6c1d2e3f4a5b6c1d2e3f4a5b6c1d2e3f4a5b6c1d2e3f4a5b6c1d2"
+        ],
+        "signature": "c2lnbmF0dXJl",
+        "reference_block_id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+        "cluster_chain_id": "flow-testnet-cluster-0"
+      }
+    ],
+    "block_seals": []
+  },
+  "block_status": "BLOCK_SEALED",
+  "_links": {
+    "_self": "/v1/blocks/a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2"
+  }
+}

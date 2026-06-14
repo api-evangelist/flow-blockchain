@@ -1,0 +1,27 @@
+{
+  "script": "aW1wb3J0IEZ1bmdpYmxlVG9rZW4gZnJvbSAweDlhMDc2NmQ5M2I2NjA4YjcKCnRyYW5zYWN0aW9uKGFtb3VudDogVUZpeDY0LCByZWNpcGllbnQ6IEFkZHJlc3MpIHsKICBwcmVwYXJlKHNpZ25lcjogQXV0aEFjY291bnQpIHsgfQp9",
+  "arguments": [],
+  "reference_block_id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2",
+  "gas_limit": "9999",
+  "payer": "f8d6e0586b0a20c7",
+  "proposal_key": {
+    "address": "f8d6e0586b0a20c7",
+    "key_index": "0",
+    "sequence_number": "42"
+  },
+  "authorizers": ["f8d6e0586b0a20c7"],
+  "payload_signatures": [
+    {
+      "address": "f8d6e0586b0a20c7",
+      "key_index": "0",
+      "signature": "cGF5bG9hZHNpZ25hdHVyZQ=="
+    }
+  ],
+  "envelope_signatures": [
+    {
+      "address": "f8d6e0586b0a20c7",
+      "key_index": "0",
+      "signature": "ZW52ZWxvcGVzaWduYXR1cmU="
+    }
+  ]
+}

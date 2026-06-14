@@ -1,0 +1,23 @@
+{
+  "address": "f8d6e0586b0a20c7",
+  "balance": "10000000000",
+  "keys": [
+    {
+      "index": "0",
+      "public_key": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678901234567890abcdef1234567890abcdef12345678901234567890abcdef12",
+      "signing_algorithm": "ECDSAP256",
+      "hashing_algorithm": "SHA3_256",
+      "sequence_number": "42",
+      "weight": "1000",
+      "revoked": false
+    }
+  ],
+  "contracts": {},
+  "_expandable": {
+    "keys": "/v1/accounts/f8d6e0586b0a20c7/keys",
+    "contracts": "/v1/accounts/f8d6e0586b0a20c7/contracts"
+  },
+  "_links": {
+    "_self": "/v1/accounts/f8d6e0586b0a20c7"
+  }
+}

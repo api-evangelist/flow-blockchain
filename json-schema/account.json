@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flow-blockchain/main/json-schema/account.json",
+  "title": "Account",
+  "description": "A Flow blockchain account with address, balance, public keys, and deployed contracts.",
+  "type": "object",
+  "required": ["address", "balance", "_expandable"],
+  "properties": {
+    "address": {
+      "description": "The 8-byte address of an account.",
+      "type": "string",
+      "format": "hexadecimal",
+      "pattern": "[a-fA-F0-9]{16}"
+    },
+    "balance": {
+      "type": "string",
+      "format": "uint64",
+      "description": "Flow balance of the account."
+    },
+    "keys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "public_key", "signing_algorithm", "hashing_algorithm", "sequence_number", "weight", "revoked"],
+        "properties": {
+          "index": { "type": "string", "format": "uint64", "description": "Index of the public key." },
+          "public_key": { "type": "string", "format": "hex", "description": "Hex encoded public key." },
+          "signing_algorithm": {
+            "type": "string",
+            "enum": ["BLSBLS12381", "ECDSAP256", "ECDSASecp256k1"]
+          },
+          "hashing_algorithm": {
+            "type": "string",
+            "enum": ["SHA2_256", "SHA2_384", "SHA3_256", "SHA3_384", "KMAC128"]
+          },
+          "sequence_number": { "type": "string", "format": "uint64", "description": "Current account sequence number." },
+          "weight": { "type": "string", "format": "uint64", "description": "Weight of the key." },
+          "revoked": { "type": "boolean", "description": "Flag indicating whether the key is active or not." }
+        }
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "contracts": {
+      "type": "object",
+      "description": "A map of Cadence contract names to their Base64-encoded source code.",
+      "additionalProperties": {
+        "type": "string",
+        "format": "byte"
+      }
+    },
+    "_expandable": {
+      "type": "object",
+      "properties": {
+        "keys": { "type": "string" },
+        "contracts": { "type": "string" }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "_self": { "type": "string" }
+      }
+    }
+  }
+}

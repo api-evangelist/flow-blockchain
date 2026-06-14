@@ -1,0 +1,176 @@
+{
+  "vocabulary": "Flow Blockchain Access API",
+  "description": "Terms and concepts used in the Flow blockchain Access REST API.",
+  "terms": [
+    {
+      "term": "Block",
+      "definition": "A fundamental unit of the Flow blockchain containing a header, payload (collection guarantees and block seals), and an optional execution result. Blocks progress through states: unknown, finalized, and sealed.",
+      "type": "Resource"
+    },
+    {
+      "term": "BlockHeader",
+      "definition": "Metadata about a block including its unique ID, parent block ID, height in the chain, timestamp, and parent voter signature.",
+      "type": "Resource"
+    },
+    {
+      "term": "BlockPayload",
+      "definition": "The contents of a block including collection guarantees (references to ordered transactions) and block seals (attestations of past block execution results).",
+      "type": "Resource"
+    },
+    {
+      "term": "BlockHeight",
+      "definition": "The sequential position of a block in the blockchain, expressed as a uint64 integer or as the named values 'final' or 'sealed'.",
+      "type": "Property"
+    },
+    {
+      "term": "BlockStatus",
+      "definition": "The current state of a block: BLOCK_UNKNOWN (not yet seen), BLOCK_FINALIZED (included in chain but not yet executed), or BLOCK_SEALED (execution verified and committed).",
+      "type": "Enumeration"
+    },
+    {
+      "term": "Transaction",
+      "definition": "A signed unit of computation submitted to the Flow network, consisting of a Cadence script, arguments, signatures, and metadata. Transactions progress through Pending, Finalized, Executed, Sealed, or Expired states.",
+      "type": "Resource"
+    },
+    {
+      "term": "TransactionStatus",
+      "definition": "The lifecycle state of a transaction: Pending, Finalized, Executed, Sealed (final), or Expired (final).",
+      "type": "Enumeration"
+    },
+    {
+      "term": "TransactionExecution",
+      "definition": "The execution outcome of a transaction: Pending, Success, or Failure. Used to determine whether a sealed transaction succeeded.",
+      "type": "Enumeration"
+    },
+    {
+      "term": "ProposalKey",
+      "definition": "The account key used to propose a transaction, identified by address, key index, and sequence number to prevent replay attacks.",
+      "type": "Resource"
+    },
+    {
+      "term": "TransactionSignature",
+      "definition": "A cryptographic signature attached to a transaction payload or envelope, tied to a specific account address and key index.",
+      "type": "Resource"
+    },
+    {
+      "term": "Collection",
+      "definition": "An ordered list of transactions grouped together and guaranteed by collection nodes. Collections are referenced in block payloads via collection guarantees.",
+      "type": "Resource"
+    },
+    {
+      "term": "CollectionGuarantee",
+      "definition": "A cryptographic commitment by collection nodes that a specific collection of transactions is valid and has been included in a block.",
+      "type": "Resource"
+    },
+    {
+      "term": "ExecutionResult",
+      "definition": "The result of executing a block's transactions, containing the block ID, events emitted, computation chunks, and a link to the previous execution result.",
+      "type": "Resource"
+    },
+    {
+      "term": "ExecutionReceipt",
+      "definition": "A cryptographically signed attestation from an execution node that it executed a specific block and produced a specific execution result.",
+      "type": "Resource"
+    },
+    {
+      "term": "Account",
+      "definition": "A Flow network account identified by an 8-byte (16-character hexadecimal) address, holding a FLOW token balance, public keys, and optionally deployed Cadence smart contracts.",
+      "type": "Resource"
+    },
+    {
+      "term": "AccountPublicKey",
+      "definition": "A public cryptographic key associated with a Flow account, with a specified signing algorithm, hashing algorithm, weight, and revocation status.",
+      "type": "Resource"
+    },
+    {
+      "term": "AccountBalance",
+      "definition": "The FLOW token balance of an account, expressed as a uint64 value in the smallest unit (10^-8 FLOW).",
+      "type": "Property"
+    },
+    {
+      "term": "Address",
+      "definition": "An 8-byte (16-character hexadecimal) identifier for a Flow account.",
+      "type": "Type"
+    },
+    {
+      "term": "Identifier",
+      "definition": "A 32-byte (64-character hexadecimal) unique identifier used for blocks, transactions, collections, execution results, and other entities.",
+      "type": "Type"
+    },
+    {
+      "term": "Event",
+      "definition": "A structured log entry emitted during Cadence script or transaction execution, identified by a qualified type string and containing a Base64-encoded payload in JSON-Cadence interchange format.",
+      "type": "Resource"
+    },
+    {
+      "term": "EventType",
+      "definition": "The fully-qualified name of a Flow event, following the pattern A.<contract_address>.<ContractName>.<EventName> for Cadence contract events.",
+      "type": "Type"
+    },
+    {
+      "term": "BlockEvents",
+      "definition": "A collection of events emitted during a specific block, grouped by block ID, height, and timestamp.",
+      "type": "Resource"
+    },
+    {
+      "term": "BlockSeal",
+      "definition": "A cryptographic attestation that a block's execution result has been verified by consensus, containing the block ID, result ID, final state commitment, and aggregated approval signatures.",
+      "type": "Resource"
+    },
+    {
+      "term": "StateCommitment",
+      "definition": "The 32-byte (64-character hexadecimal) root hash of the execution state trie after processing a block.",
+      "type": "Type"
+    },
+    {
+      "term": "AggregatedSignature",
+      "definition": "A collection of signatures from multiple verification nodes combined to attest to the validity of a block seal.",
+      "type": "Resource"
+    },
+    {
+      "term": "Chunk",
+      "definition": "A subdivision of an execution result representing a portion of the computation, with start/end states and the events produced by that computation segment.",
+      "type": "Resource"
+    },
+    {
+      "term": "NetworkParameters",
+      "definition": "Network-wide configuration parameters of the Flow blockchain, including the chain ID (e.g. flow-mainnet, flow-testnet).",
+      "type": "Resource"
+    },
+    {
+      "term": "NodeVersionInfo",
+      "definition": "Version information for a Flow access node, including semantic version, git commit, spork ID, protocol version, and compatible block height range.",
+      "type": "Resource"
+    },
+    {
+      "term": "SigningAlgorithm",
+      "definition": "The cryptographic signing algorithm used for an account key: BLSBLS12381, ECDSAP256, or ECDSASecp256k1.",
+      "type": "Enumeration"
+    },
+    {
+      "term": "HashingAlgorithm",
+      "definition": "The hashing algorithm used with a signing key: SHA2_256, SHA2_384, SHA3_256, SHA3_384, or KMAC128.",
+      "type": "Enumeration"
+    },
+    {
+      "term": "Cadence",
+      "definition": "The resource-oriented programming language designed for Flow smart contracts and transaction scripts, featuring built-in resource safety and capability-based security.",
+      "type": "Concept"
+    },
+    {
+      "term": "SporkID",
+      "definition": "A unique identifier for a network upgrade (spork) on the Flow blockchain, used to distinguish protocol eras.",
+      "type": "Concept"
+    },
+    {
+      "term": "CompatibleRange",
+      "definition": "The range of block heights that a Flow node version is able to serve, defined by start_height and end_height.",
+      "type": "Resource"
+    },
+    {
+      "term": "SubscribeEvents",
+      "definition": "A WebSocket stream of events from the Flow blockchain, delivering block events in real time starting from a specified block height or ID.",
+      "type": "Resource"
+    }
+  ]
+}

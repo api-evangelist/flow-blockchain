@@ -1,0 +1,348 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "flow": "https://developers.flow.com/vocab#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Block": "flow:Block",
+    "BlockHeader": "flow:BlockHeader",
+    "BlockPayload": "flow:BlockPayload",
+    "BlockSeal": "flow:BlockSeal",
+    "BlockEvents": "flow:BlockEvents",
+    "BlockStatus": "flow:BlockStatus",
+    "BlockHeight": "flow:BlockHeight",
+
+    "Transaction": "flow:Transaction",
+    "TransactionResult": "flow:TransactionResult",
+    "TransactionStatus": "flow:TransactionStatus",
+    "TransactionExecution": "flow:TransactionExecution",
+    "TransactionSignature": "flow:TransactionSignature",
+    "ProposalKey": "flow:ProposalKey",
+
+    "Collection": "flow:Collection",
+    "CollectionGuarantee": "flow:CollectionGuarantee",
+
+    "ExecutionResult": "flow:ExecutionResult",
+    "ExecutionReceipt": "flow:ExecutionReceipt",
+    "Chunk": "flow:Chunk",
+
+    "Account": "flow:Account",
+    "AccountPublicKey": "flow:AccountPublicKey",
+    "AccountBalance": "flow:AccountBalance",
+
+    "Event": "flow:Event",
+    "EventType": "flow:EventType",
+
+    "NetworkParameters": "flow:NetworkParameters",
+    "NodeVersionInfo": "flow:NodeVersionInfo",
+    "CompatibleRange": "flow:CompatibleRange",
+
+    "AggregatedSignature": "flow:AggregatedSignature",
+    "StateCommitment": "flow:StateCommitment",
+
+    "id": "@id",
+    "type": "@type",
+
+    "address": {
+      "@id": "flow:address",
+      "@type": "xsd:string"
+    },
+    "balance": {
+      "@id": "flow:balance",
+      "@type": "xsd:string"
+    },
+    "height": {
+      "@id": "flow:height",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "parent_id": {
+      "@id": "flow:parentId",
+      "@type": "xsd:string"
+    },
+    "block_id": {
+      "@id": "flow:blockId",
+      "@type": "xsd:string"
+    },
+    "block_status": {
+      "@id": "flow:blockStatus",
+      "@type": "xsd:string"
+    },
+    "block_height": {
+      "@id": "flow:blockHeight",
+      "@type": "xsd:string"
+    },
+    "block_timestamp": {
+      "@id": "flow:blockTimestamp",
+      "@type": "xsd:dateTime"
+    },
+    "transaction_id": {
+      "@id": "flow:transactionId",
+      "@type": "xsd:string"
+    },
+    "transaction_index": {
+      "@id": "flow:transactionIndex",
+      "@type": "xsd:string"
+    },
+    "event_index": {
+      "@id": "flow:eventIndex",
+      "@type": "xsd:string"
+    },
+    "payload": {
+      "@id": "flow:payload",
+      "@type": "xsd:string"
+    },
+    "script": {
+      "@id": "flow:script",
+      "@type": "xsd:string"
+    },
+    "arguments": {
+      "@id": "flow:arguments",
+      "@container": "@list"
+    },
+    "reference_block_id": {
+      "@id": "flow:referenceBlockId",
+      "@type": "xsd:string"
+    },
+    "gas_limit": {
+      "@id": "flow:gasLimit",
+      "@type": "xsd:string"
+    },
+    "payer": {
+      "@id": "flow:payer",
+      "@type": "xsd:string"
+    },
+    "proposal_key": {
+      "@id": "flow:proposalKey"
+    },
+    "authorizers": {
+      "@id": "flow:authorizers",
+      "@container": "@list"
+    },
+    "payload_signatures": {
+      "@id": "flow:payloadSignatures",
+      "@container": "@list"
+    },
+    "envelope_signatures": {
+      "@id": "flow:envelopeSignatures",
+      "@container": "@list"
+    },
+    "status": {
+      "@id": "flow:status",
+      "@type": "xsd:string"
+    },
+    "status_code": {
+      "@id": "flow:statusCode",
+      "@type": "xsd:integer"
+    },
+    "error_message": {
+      "@id": "flow:errorMessage",
+      "@type": "xsd:string"
+    },
+    "computation_used": {
+      "@id": "flow:computationUsed",
+      "@type": "xsd:string"
+    },
+    "execution": {
+      "@id": "flow:execution",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "flow:events",
+      "@container": "@list"
+    },
+    "chunks": {
+      "@id": "flow:chunks",
+      "@container": "@list"
+    },
+    "previous_result_id": {
+      "@id": "flow:previousResultId",
+      "@type": "xsd:string"
+    },
+    "result_id": {
+      "@id": "flow:resultId",
+      "@type": "xsd:string"
+    },
+    "executor_id": {
+      "@id": "flow:executorId",
+      "@type": "xsd:string"
+    },
+    "executor_signature": {
+      "@id": "flow:executorSignature",
+      "@type": "xsd:string"
+    },
+    "sporks": {
+      "@id": "flow:sporks",
+      "@container": "@list"
+    },
+    "keys": {
+      "@id": "flow:keys",
+      "@container": "@list"
+    },
+    "contracts": {
+      "@id": "flow:contracts"
+    },
+    "index": {
+      "@id": "flow:index",
+      "@type": "xsd:string"
+    },
+    "public_key": {
+      "@id": "flow:publicKey",
+      "@type": "xsd:string"
+    },
+    "signing_algorithm": {
+      "@id": "flow:signingAlgorithm",
+      "@type": "xsd:string"
+    },
+    "hashing_algorithm": {
+      "@id": "flow:hashingAlgorithm",
+      "@type": "xsd:string"
+    },
+    "sequence_number": {
+      "@id": "flow:sequenceNumber",
+      "@type": "xsd:string"
+    },
+    "weight": {
+      "@id": "flow:weight",
+      "@type": "xsd:string"
+    },
+    "revoked": {
+      "@id": "flow:revoked",
+      "@type": "xsd:boolean"
+    },
+    "key_index": {
+      "@id": "flow:keyIndex",
+      "@type": "xsd:string"
+    },
+    "signature": {
+      "@id": "flow:signature",
+      "@type": "xsd:string"
+    },
+    "transactions": {
+      "@id": "flow:transactions",
+      "@container": "@list"
+    },
+    "collection_guarantees": {
+      "@id": "flow:collectionGuarantees",
+      "@container": "@list"
+    },
+    "block_seals": {
+      "@id": "flow:blockSeals",
+      "@container": "@list"
+    },
+    "collection_id": {
+      "@id": "flow:collectionId",
+      "@type": "xsd:string"
+    },
+    "signer_ids": {
+      "@id": "flow:signerIds",
+      "@container": "@list"
+    },
+    "cluster_chain_id": {
+      "@id": "flow:clusterChainId",
+      "@type": "xsd:string"
+    },
+    "final_state": {
+      "@id": "flow:finalState",
+      "@type": "xsd:string"
+    },
+    "aggregated_approval_signatures": {
+      "@id": "flow:aggregatedApprovalSignatures",
+      "@container": "@list"
+    },
+    "verifier_signatures": {
+      "@id": "flow:verifierSignatures",
+      "@container": "@list"
+    },
+    "collection_index": {
+      "@id": "flow:collectionIndex",
+      "@type": "xsd:string"
+    },
+    "start_state": {
+      "@id": "flow:startState",
+      "@type": "xsd:string"
+    },
+    "end_state": {
+      "@id": "flow:endState",
+      "@type": "xsd:string"
+    },
+    "event_collection": {
+      "@id": "flow:eventCollection",
+      "@type": "xsd:string"
+    },
+    "number_of_transactions": {
+      "@id": "flow:numberOfTransactions",
+      "@type": "xsd:string"
+    },
+    "total_computation_used": {
+      "@id": "flow:totalComputationUsed",
+      "@type": "xsd:string"
+    },
+    "chain_id": {
+      "@id": "flow:chainId",
+      "@type": "xsd:string"
+    },
+    "semver": {
+      "@id": "schema:softwareVersion",
+      "@type": "xsd:string"
+    },
+    "commit": {
+      "@id": "flow:gitCommit",
+      "@type": "xsd:string"
+    },
+    "spork_id": {
+      "@id": "flow:sporkId",
+      "@type": "xsd:string"
+    },
+    "protocol_version": {
+      "@id": "flow:protocolVersion",
+      "@type": "xsd:string"
+    },
+    "protocol_state_version": {
+      "@id": "flow:protocolStateVersion",
+      "@type": "xsd:string"
+    },
+    "spork_root_block_height": {
+      "@id": "flow:sporkRootBlockHeight",
+      "@type": "xsd:string"
+    },
+    "node_root_block_height": {
+      "@id": "flow:nodeRootBlockHeight",
+      "@type": "xsd:string"
+    },
+    "compatible_range": {
+      "@id": "flow:compatibleRange"
+    },
+    "start_height": {
+      "@id": "flow:startHeight",
+      "@type": "xsd:string"
+    },
+    "end_height": {
+      "@id": "flow:endHeight",
+      "@type": "xsd:string"
+    },
+    "header": {
+      "@id": "flow:header"
+    },
+    "payload_field": {
+      "@id": "flow:blockPayload"
+    },
+    "execution_result": {
+      "@id": "flow:executionResult"
+    },
+    "parent_voter_signature": {
+      "@id": "flow:parentVoterSignature",
+      "@type": "xsd:string"
+    },
+    "_links": {
+      "@id": "flow:links"
+    },
+    "_expandable": {
+      "@id": "flow:expandable"
+    }
+  }
+}

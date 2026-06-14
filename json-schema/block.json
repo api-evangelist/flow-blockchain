@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flow-blockchain/main/json-schema/block.json",
+  "title": "Block",
+  "description": "A Flow blockchain block containing a header, payload, and execution result.",
+  "type": "object",
+  "required": ["header", "block_status"],
+  "properties": {
+    "header": {
+      "$ref": "#/definitions/BlockHeader"
+    },
+    "payload": {
+      "$ref": "#/definitions/BlockPayload"
+    },
+    "execution_result": {
+      "$ref": "#/definitions/ExecutionResult"
+    },
+    "block_status": {
+      "type": "string",
+      "description": "The status of the block.",
+      "enum": ["BLOCK_UNKNOWN", "BLOCK_FINALIZED", "BLOCK_SEALED"]
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "_self": { "type": "string" }
+      }
+    }
+  },
+  "definitions": {
+    "Identifier": {
+      "description": "A 32-byte unique identifier for an entity.",
+      "type": "string",
+      "format": "hexadecimal",
+      "pattern": "[a-fA-F0-9]{64}"
+    },
+    "Signature": {
+      "description": "A variable length signature.",
+      "type": "string",
+      "format": "byte"
+    },
+    "BlockHeader": {
+      "type": "object",
+      "required": ["id", "parent_id", "height", "timestamp", "parent_voter_signature"],
+      "properties": {
+        "id": { "$ref": "#/definitions/Identifier" },
+        "parent_id": { "$ref": "#/definitions/Identifier" },
+        "height": { "type": "string", "format": "uint64" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "parent_voter_signature": { "$ref": "#/definitions/Signature" }
+      }
+    },
+    "CollectionGuarantee": {
+      "type": "object",
+      "required": ["collection_id", "signer_ids", "signature", "reference_block_id", "cluster_chain_id"],
+      "properties": {
+        "collection_id": { "$ref": "#/definitions/Identifier" },
+        "signer_ids": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Identifier" },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "signature": { "$ref": "#/definitions/Signature" },
+        "reference_block_id": { "$ref": "#/definitions/Identifier" },
+        "cluster_chain_id": { "type": "string" }
+      }
+    },
+    "BlockSeal": {
+      "type": "object",
+      "required": ["block_id", "result_id", "final_state", "aggregated_approval_signatures"],
+      "properties": {
+        "block_id": { "$ref": "#/definitions/Identifier" },
+        "result_id": { "$ref": "#/definitions/Identifier" },
+        "final_state": {
+          "description": "The root hash of the state tree.",
+          "type": "string",
+          "format": "hexadecimal",
+          "pattern": "[a-fA-F0-9]{64}"
+        },
+        "aggregated_approval_signatures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["verifier_signatures", "signer_ids"],
+            "properties": {
+              "verifier_signatures": {
+                "type": "array",
+                "items": { "$ref": "#/definitions/Signature" },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "signer_ids": {
+                "type": "array",
+                "items": { "$ref": "#/definitions/Identifier" },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            }
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "BlockPayload": {
+      "type": "object",
+      "required": ["collection_guarantees", "block_seals"],
+      "properties": {
+        "collection_guarantees": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CollectionGuarantee" },
+          "uniqueItems": true
+        },
+        "block_seals": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/BlockSeal" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "required": ["type", "transaction_id", "transaction_index", "event_index", "payload"],
+      "properties": {
+        "type": { "type": "string", "description": "The qualified event type." },
+        "transaction_id": { "$ref": "#/definitions/Identifier" },
+        "transaction_index": { "type": "string", "format": "uint64" },
+        "event_index": { "type": "string", "format": "uint64" },
+        "payload": { "type": "string", "format": "byte" }
+      }
+    },
+    "Chunk": {
+      "type": "object",
+      "required": ["block_id", "collection_index", "start_state", "end_state", "event_collection", "index", "number_of_transactions", "total_computation_used"],
+      "properties": {
+        "block_id": { "$ref": "#/definitions/Identifier" },
+        "collection_index": { "type": "string", "format": "uint64" },
+        "start_state": { "type": "string", "format": "byte" },
+        "end_state": { "type": "string", "format": "byte" },
+        "event_collection": { "type": "string", "format": "byte" },
+        "index": { "type": "string", "format": "uint64" },
+        "number_of_transactions": { "type": "string", "format": "uint64" },
+        "total_computation_used": { "type": "string", "format": "uint64" }
+      }
+    },
+    "ExecutionResult": {
+      "type": "object",
+      "required": ["id", "block_id", "events", "previous_result_id"],
+      "properties": {
+        "id": { "$ref": "#/definitions/Identifier" },
+        "block_id": { "$ref": "#/definitions/Identifier" },
+        "events": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Event" }
+        },
+        "chunks": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Chunk" }
+        },
+        "previous_result_id": { "$ref": "#/definitions/Identifier" }
+      }
+    }
+  }
+}

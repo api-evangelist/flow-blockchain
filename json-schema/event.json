@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/flow-blockchain/main/json-schema/event.json",
+  "title": "Event",
+  "description": "A Flow blockchain event emitted during transaction or block execution.",
+  "type": "object",
+  "required": ["type", "transaction_id", "transaction_index", "event_index", "payload"],
+  "properties": {
+    "type": {
+      "description": "The qualified event type identifier.",
+      "type": "string"
+    },
+    "transaction_id": {
+      "description": "A 32-byte unique identifier for an entity.",
+      "type": "string",
+      "format": "hexadecimal",
+      "pattern": "[a-fA-F0-9]{64}"
+    },
+    "transaction_index": {
+      "type": "string",
+      "format": "uint64"
+    },
+    "event_index": {
+      "type": "string",
+      "format": "uint64"
+    },
+    "payload": {
+      "type": "string",
+      "format": "byte",
+      "description": "Base64-encoded event payload in JSON-Cadence interchange format."
+    }
+  }
+}
