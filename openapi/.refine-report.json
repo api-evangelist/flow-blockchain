@@ -1,0 +1,34 @@
+{
+  "provider": "flow-blockchain",
+  "sources": [
+    "flow-blockchain-accounts-api-openapi.yml",
+    "flow-blockchain-blocks-api-openapi.yml",
+    "flow-blockchain-collections-api-openapi.yml",
+    "flow-blockchain-events-api-openapi.yml",
+    "flow-blockchain-execution-receipts-api-openapi.yml",
+    "flow-blockchain-execution-results-api-openapi.yml",
+    "flow-blockchain-network-api-openapi.yml",
+    "flow-blockchain-nodeversioninfo-api-openapi.yml",
+    "flow-blockchain-scripts-api-openapi.yml",
+    "flow-blockchain-subscribe-events-api-openapi.yml",
+    "flow-blockchain-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "flow-blockchain-accounts-api-openapi.yml",
+    "flow-blockchain-blocks-api-openapi.yml",
+    "flow-blockchain-collections-api-openapi.yml",
+    "flow-blockchain-events-api-openapi.yml",
+    "flow-blockchain-execution-receipts-api-openapi.yml",
+    "flow-blockchain-execution-results-api-openapi.yml",
+    "flow-blockchain-network-api-openapi.yml",
+    "flow-blockchain-nodeversioninfo-api-openapi.yml",
+    "flow-blockchain-scripts-api-openapi.yml",
+    "flow-blockchain-subscribe-events-api-openapi.yml",
+    "flow-blockchain-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
