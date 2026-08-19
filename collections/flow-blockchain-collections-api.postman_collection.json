@@ -1,0 +1,301 @@
+{
+  "item": [
+    {
+      "id": "61079753-8bc9-4c89-afde-34f713972a3d",
+      "name": "Collections",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "799f5248-c9af-4e1d-8571-72a900fc06df",
+          "name": "Gets a Collection by ID",
+          "request": {
+            "name": "Gets a Collection by ID",
+            "description": {
+              "content": "Get a collection by provided collection ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "collections",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "A comma-separated list indicating which properties of the content to expand."
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "A comma-separated list indicating which properties of the content to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<hexadecimal>",
+                  "key": "id",
+                  "description": "(Required) The collection ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8432be75-6d22-45f7-869c-43b341dd741f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hexadecimal>",
+                      "key": "id",
+                      "description": "(Required) The collection ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<hexadecimal>\",\n  \"_expandable\": {\n    \"transactions\": [\n      \"http://JWZYuqyli.ryuwBO,EcSvXyPUhdsi+OWKESBIfHV.yMOakQzEUWPOk,b3CD9xr12k2e.L\",\n      \"http://ctORnfECyBdmqycYuujjArfYQPtYsubO.okbnF1BPW+NUsQp6JLO\"\n    ]\n  },\n  \"transactions\": [\n    {\n      \"id\": \"<hexadecimal>\",\n      \"script\": \"string\",\n      \"arguments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference_block_id\": \"<hexadecimal>\",\n      \"gas_limit\": \"string\",\n      \"payer\": \"09dbcB1efd71aAbc\",\n      \"proposal_key\": {\n        \"address\": \"1061349FD44De68b\",\n        \"key_index\": \"string\",\n        \"sequence_number\": \"string\"\n      },\n      \"authorizers\": [\n        \"2f722C8854fCbC81\",\n        \"DE7D31B6a7FC8aEF\"\n      ],\n      \"payload_signatures\": [\n        {\n          \"address\": \"F7A2DF0E3eEcF93A\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        },\n        {\n          \"address\": \"22FCa0EfE8e518Fd\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        }\n      ],\n      \"envelope_signatures\": [\n        {\n          \"address\": \"b2319F0025AA74aD\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        },\n        {\n          \"address\": \"dc7ac6dedcDfB64b\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        }\n      ],\n      \"_expandable\": {\n        \"result\": \"https://lWNAArltarZLwyhpc.ltaQpZE-vufYfSwCcUT7X-0g6bi.T6Lk5jBpu3,kF3cWSex-FN,OkJUUPE\"\n      },\n      \"result\": {\n        \"block_id\": \"<hexadecimal>\",\n        \"collection_id\": \"<hexadecimal>\",\n        \"status\": \"Sealed\",\n        \"status_code\": 2319,\n        \"error_message\": \"string\",\n        \"computation_used\": \"string\",\n        \"events\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_index\": \"string\",\n            \"event_index\": \"string\",\n            \"payload\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_index\": \"string\",\n            \"event_index\": \"string\",\n            \"payload\": \"string\"\n          }\n        ],\n        \"execution\": \"Pending\",\n        \"metadata\": {\n          \"executor_metadata\": {\n            \"execution_result_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executor_ids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"_links\": {\n          \"_self\": \"string\"\n        }\n      },\n      \"_links\": {\n        \"_self\": \"string\"\n      }\n    },\n    {\n      \"id\": \"<hexadecimal>\",\n      \"script\": \"string\",\n      \"arguments\": [\n        \"string\",\n        \"string\"\n      ],\n      \"reference_block_id\": \"<hexadecimal>\",\n      \"gas_limit\": \"string\",\n      \"payer\": \"fCE9FC7d8bB9dbC2\",\n      \"proposal_key\": {\n        \"address\": \"FC7FF082B3EBaee3\",\n        \"key_index\": \"string\",\n        \"sequence_number\": \"string\"\n      },\n      \"authorizers\": [\n        \"FB60e46f66A18568\",\n        \"6B4fF4c36B1aca18\"\n      ],\n      \"payload_signatures\": [\n        {\n          \"address\": \"7EE6EC66dBc62Ba9\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        },\n        {\n          \"address\": \"E3f68d3aB4bEFEdF\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        }\n      ],\n      \"envelope_signatures\": [\n        {\n          \"address\": \"317cAab3ceda7B58\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        },\n        {\n          \"address\": \"FCB37562fba1B7Aa\",\n          \"key_index\": \"string\",\n          \"signature\": \"string\"\n        }\n      ],\n      \"_expandable\": {\n        \"result\": \"https://BZbblExuedweIDtUNMObES.npgNLb4Utc61GF6l-E4ym7z.HPjbCud8QNyFf\"\n      },\n      \"result\": {\n        \"block_id\": \"<hexadecimal>\",\n        \"collection_id\": \"<hexadecimal>\",\n        \"status\": \"Executed\",\n        \"status_code\": 8606,\n        \"error_message\": \"string\",\n        \"computation_used\": \"string\",\n        \"events\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_index\": \"string\",\n            \"event_index\": \"string\",\n            \"payload\": \"string\"\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transaction_index\": \"string\",\n            \"event_index\": \"string\",\n            \"payload\": \"string\"\n          }\n        ],\n        \"execution\": \"Pending\",\n        \"metadata\": {\n          \"executor_metadata\": {\n            \"execution_result_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"executor_ids\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"_links\": {\n          \"_self\": \"string\"\n        }\n      },\n      \"_links\": {\n        \"_self\": \"string\"\n      }\n    }\n  ],\n  \"_links\": {\n    \"_self\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1166444-7f17-4990-b1a0-6de6a1c3ca36",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hexadecimal>",
+                      "key": "id",
+                      "description": "(Required) The collection ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6798,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5ef5d2d-3cf2-4376-8f07-59999f183904",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hexadecimal>",
+                      "key": "id",
+                      "description": "(Required) The collection ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6798,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35a31e7c-f5ce-43b1-8709-332fc8cc126c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "collections",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<hexadecimal>",
+                      "key": "id",
+                      "description": "(Required) The collection ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6798,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest-testnet.onflow.org/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "53a4c637-d3a9-4051-ae20-6359c6631ee0",
+    "name": "Access Accounts Collections API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

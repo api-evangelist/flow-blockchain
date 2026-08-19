@@ -1,0 +1,388 @@
+{
+  "item": [
+    {
+      "id": "5a77b1c6-efaf-4bdb-8257-6d1099457f88",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c10ae04b-d59a-4d42-a139-74332476168c",
+          "name": "Get Events",
+          "request": {
+            "name": "Get Events",
+            "description": {
+              "content": "Query on-chain events by their name in the specified blocks heights or block IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) The event type is [identifier of the event as defined here](https://docs.onflow.org/core-contracts/flow-token/#events)."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_height",
+                  "value": "<uint64>",
+                  "description": "The start height of the block range for events. Must be used together with `end_height`. This parameter is incompatible with `block_ids`."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_height",
+                  "value": "<uint64>",
+                  "description": "The end height of the block range for events. Must be used together with `start_height`. This parameter is incompatible with `block_ids`."
+                },
+                {
+                  "disabled": false,
+                  "key": "block_ids",
+                  "value": "<hexadecimal>",
+                  "description": "List of block IDs. Either provide this parameter or both height parameters. This parameter is incompatible with heights parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "select",
+                  "value": "<string>",
+                  "description": "A comma-separated list indicating which properties of the content to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "agreeing_executors_count",
+                  "value": "<uint64>",
+                  "description": "A minimum number of execution receipts for the execution result."
+                },
+                {
+                  "disabled": false,
+                  "key": "required_executor_ids",
+                  "value": "<hexadecimal>",
+                  "description": "A set of execution node IDs, one of which must have produced the execution result."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_executor_metadata",
+                  "value": "<boolean>",
+                  "description": "Specifies whether or not to include the executor metadata in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "115889fd-92d3-4155-9c3a-9bc408fcc90c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "end_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "block_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreeing_executors_count",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "required_executor_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "include_executor_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"block_id\": \"<hexadecimal>\",\n  \"block_height\": \"string\",\n  \"block_timestamp\": \"2018-05-14T04:20:16.566Z\",\n  \"events\": [\n    {\n      \"type\": \"<string>\",\n      \"transaction_id\": \"<hexadecimal>\",\n      \"transaction_index\": \"string\",\n      \"event_index\": \"string\",\n      \"payload\": \"string\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"transaction_id\": \"<hexadecimal>\",\n      \"transaction_index\": \"string\",\n      \"event_index\": \"string\",\n      \"payload\": \"string\"\n    }\n  ],\n  \"metadata\": {\n    \"executor_metadata\": {\n      \"execution_result_id\": \"<hexadecimal>\",\n      \"executor_ids\": [\n        \"<hexadecimal>\",\n        \"<hexadecimal>\"\n      ]\n    }\n  },\n  \"_links\": {\n    \"_self\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e06e23e-4756-44fa-a0cc-07cae942dbcb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "end_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "block_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreeing_executors_count",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "required_executor_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "include_executor_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2407,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5aa54f8-9714-46da-a91f-bd633a57d734",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "end_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "block_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreeing_executors_count",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "required_executor_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "include_executor_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2407,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aced049a-6f25-406a-872a-ccbec91a1fbf",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "end_height",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "block_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreeing_executors_count",
+                      "value": "<uint64>"
+                    },
+                    {
+                      "key": "required_executor_ids",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "include_executor_metadata",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2407,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest-testnet.onflow.org/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "82384b80-ac84-49f7-a6d1-0988a4e89bd6",
+    "name": "Access Accounts Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "83c80ed6-908f-4a8b-944e-83663edcdb3d",
+      "name": "Scripts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9406c13e-ec35-4a0d-9c14-00b3175dc812",
+          "name": "Execute a Cadence Script",
+          "request": {
+            "name": "Execute a Cadence Script",
+            "description": {
+              "content": "Executes a read-only Cadence script against the execution state at the given block height or ID. If block height or ID is not specified, then the script is executed at the latest sealed block height.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "scripts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "block_id",
+                  "value": "<hexadecimal>",
+                  "description": "The ID of the block to execute the script against. For a specific block height, use `block_height` instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "block_height",
+                  "value": "<uint64>",
+                  "description": "The height of the block to execute the script against. This parameter is incompatible with `block_id`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"script\": \"<base64>\",\n  \"arguments\": [\n    \"<byte>\",\n    \"<byte>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1095277-455c-4688-ae62-f5af9073db53",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scripts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_id",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "block_height",
+                      "value": "<uint64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"script\": \"<base64>\",\n  \"arguments\": [\n    \"<byte>\",\n    \"<byte>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15c7cfe4-461c-40d6-a316-bbd56daa72a9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scripts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_id",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "block_height",
+                      "value": "<uint64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"script\": \"<base64>\",\n  \"arguments\": [\n    \"<byte>\",\n    \"<byte>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2704,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "707201e2-2c7c-483f-ba99-30e46107e85c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scripts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "block_id",
+                      "value": "<hexadecimal>"
+                    },
+                    {
+                      "key": "block_height",
+                      "value": "<uint64>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"script\": \"<base64>\",\n  \"arguments\": [\n    \"<byte>\",\n    \"<byte>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2704,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rest-testnet.onflow.org/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "316ecc9b-6473-4510-8c44-3e19107f264e",
+    "name": "Access Accounts Scripts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
