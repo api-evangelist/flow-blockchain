@@ -1,11 +1,9 @@
 name: Flow
-description: >-
-  Flow is a developer-friendly Layer 1 proof-of-stake blockchain built for
-  consumer applications, NFTs, games, AI agents, and DeFi at scale. The Flow
-  REST API (Access API) enables developers to query accounts, blocks,
-  collections, events, and transactions, execute Cadence scripts, and submit
-  signed transactions to the network. Flow supports both native Cadence smart
-  contracts and EVM-compatible Solidity deployments.
+description: Flow is a developer-friendly Layer 1 proof-of-stake blockchain built for consumer applications,
+  NFTs, games, AI agents, and DeFi at scale. The Flow REST API (Access API) enables developers to query
+  accounts, blocks, collections, events, and transactions, execute Cadence scripts, and submit signed
+  transactions to the network. Flow supports both native Cadence smart contracts and EVM-compatible Solidity
+  deployments.
 deliveryModel:
   model: saas
   open_source: false
@@ -32,25 +30,25 @@ accessModel:
   method: derived
 image: https://developers.flow.com/img/flow-docs-logo.png
 tags:
-  - Blockchain
-  - NFT
-  - Games
-  - DeFi
-  - Layer 1
-  - Cadence
-  - Smart Contracts
-  - Web3
+- Blockchain
+- NFT
+- Games
+- DeFi
+- Layer 1
+- Cadence
+- Smart Contracts
+- Web3
 tags_raw:
-  - Blockchain
-  - NFTs
-  - Games
-  - DeFi
-  - Layer 1
-  - Cadence
-  - Smart Contracts
-  - Web3
-created: "2026-06-13"
-modified: "2026-06-13"
+- Blockchain
+- NFTs
+- Games
+- DeFi
+- Layer 1
+- Cadence
+- Smart Contracts
+- Web3
+created: '2026-06-13'
+modified: '2026-09-16'
 url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
@@ -69,14 +67,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-blocks-api
   name: Flow Blocks API
   description: The Blocks API from Flow — 3 operation(s) for blocks.
@@ -90,14 +85,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-collections-api
   name: Flow Collections API
   description: The Collections API from Flow — 1 operation(s) for collections.
@@ -113,14 +105,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-events-api
   name: Flow Events API
   description: The Events API from Flow — 1 operation(s) for events.
@@ -136,14 +125,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-execution-receipts-api
   name: Flow Execution Receipts API
   description: The Execution Receipts API from Flow — 2 operation(s) for execution receipts.
@@ -157,14 +143,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-execution-results-api
   name: Flow Execution Results API
   description: The Execution Results API from Flow — 2 operation(s) for execution results.
@@ -178,14 +161,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-network-api
   name: Flow Network API
   description: The Network API from Flow — 1 operation(s) for network.
@@ -199,14 +179,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-nodeversioninfo-api
   name: Flow NodeVersionInfo API
   description: The NodeVersionInfo API from Flow — 1 operation(s) for nodeversioninfo.
@@ -220,14 +197,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-scripts-api
   name: Flow Scripts API
   description: The Scripts API from Flow — 1 operation(s) for scripts.
@@ -241,14 +215,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-subscribe-events-api
   name: Flow Subscribe events API
   description: The Subscribe events API from Flow — 1 operation(s) for subscribe events.
@@ -262,14 +233,11 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 - aid: flow-blockchain:flow-blockchain-transactions-api
   name: Flow Transactions API
   description: The Transactions API from Flow — 4 operation(s) for transactions.
@@ -285,22 +253,21 @@ apis:
   - type: Documentation
     url: https://developers.flow.com/http-api
   - type: Plans
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/plans/plans.yml
   - type: RateLimits
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/rate-limits/rate-limits.yml
   - type: FinOps
-    url: >-
-      https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
+    url: https://raw.githubusercontent.com/api-evangelist/flow-blockchain/refs/heads/main/finops/finops.yml
 maintainers:
-  - FN: Kin Lane
-    X-github: kinlane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  X-github: kinlane
+  email: kin@apievangelist.com
 common:
-  - type: AgenticAccess
-    url: agentic-access/flow-blockchain-agentic-access.yml
-  - type: DomainSecurity
-    url: security/flow-blockchain-domain-security.yml
-  - url: https://flow.com/blog
-    type: Blog
+- type: Website
+  url: https://flow.com
+- type: AgenticAccess
+  url: agentic-access/flow-blockchain-agentic-access.yml
+- type: DomainSecurity
+  url: security/flow-blockchain-domain-security.yml
+- url: https://flow.com/blog
+  type: Blog
