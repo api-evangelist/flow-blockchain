@@ -1,26 +1,27 @@
-# Kin Score artifact — flow-blockchain — 2026-08-17T064519
+# Kin Score artifact — flow-blockchain — 2026-09-16T225339
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: flow-blockchain
-  schema_version: 0.11.0
-  scored_at: '2026-08-17'
-  run_ts: 2026-08-17T064519
-  composite: 37.3
+  schema_version: 0.22.0
+  scored_at: '2026-09-16'
+  run_ts: 2026-09-16T225339
+  composite: 31.9
   band: thin
   facets:
-    discoverability: 74.1
-    contract_quality: 58.2
-    governance: 58.3
+    discoverability: 68.5
+    contract_quality: 57.3
+    contract_governance: 9.8
     operational_transparency: 0.0
-    developer_ergonomics: 2.2
-    commercial_clarity: 39.5
+    developer_ergonomics: 11.9
+    access_clarity: 39.5
   agent_readiness:
-    score: 21.6
+    score: 17.3
     band: agent-aware
     dimensions:
       spec_presence: true
       agentic_access: derived
+      reversibility_documented: false
       mcp_server: false
       auth_clarity: false
       idempotency: false
@@ -33,6 +34,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     agentic_access: derived
     contracts:
