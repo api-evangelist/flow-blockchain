@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Access Accounts Network API
+  title: Access Network API
 servers:
 - url: https://rest-testnet.onflow.org/v1
   description: Flow Testnet
@@ -29,8 +29,16 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getNetworkParameters
+      x-operation-id-source: derived
 components:
   responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     404NotFound:
       description: Not Found
       content:
@@ -43,26 +51,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
     NetworkParameters:
       type: object
       required:
       - chain_id
       properties:
         chain_id:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
           type: string
 externalDocs:
   description: Find out more about the Access API

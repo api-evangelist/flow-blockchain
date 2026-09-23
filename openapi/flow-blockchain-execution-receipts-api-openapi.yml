@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Access Accounts Execution Receipts API
+  title: Access Execution Receipts API
 servers:
 - url: https://rest-testnet.onflow.org/v1
   description: Flow Testnet
@@ -40,6 +40,8 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getExecutionReceipts
+      x-operation-id-source: derived
   /execution_receipts/results/{id}:
     get:
       summary: Get Execution Receipts by Result ID
@@ -70,21 +72,73 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getExecutionReceiptsResultsById
+      x-operation-id-source: derived
 components:
+  parameters:
+    expandParam:
+      description: A comma-separated list indicating which properties of the content to expand.
+      name: expand
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      explode: false
+      style: form
+      required: false
+    selectParam:
+      description: A comma-separated list indicating which properties of the content to return.
+      name: select
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      explode: false
+      style: form
+      required: false
   schemas:
+    ExecutionReceipt:
+      type: object
+      required:
+      - executor_id
+      - result_id
+      - executor_signature
+      - _expandable
+      properties:
+        executor_id:
+          description: Node ID of the execution node who produced the receipt.
+          $ref: '#/components/schemas/Identifier'
+        result_id:
+          $ref: '#/components/schemas/Identifier'
+        spocks:
+          type: array
+          items:
+            type: string
+            format: byte
+        executor_signature:
+          type: string
+          format: byte
+        execution_result:
+          $ref: '#/components/schemas/ExecutionResult'
+        _expandable:
+          type: object
+          properties:
+            execution_result:
+              type: string
+              format: uri
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     Identifier:
       description: A 32-byte unique identifier for an entity.
       type: string
       format: hexadecimal
       pattern: '[a-fA-F0-9]{64}'
-    Links:
-      type: object
-      properties:
-        _self:
-          type: string
-    EventType:
-      description: The qualified event type.
-      type: string
     Chunk:
       type: object
       required:
@@ -120,6 +174,9 @@ components:
         total_computation_used:
           type: string
           format: uint64
+    EventType:
+      description: The qualified event type.
+      type: string
     Error:
       type: object
       properties:
@@ -149,6 +206,16 @@ components:
         payload:
           type: string
           format: byte
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
     ExecutionResult:
       type: object
       required:
@@ -175,54 +242,24 @@ components:
           $ref: '#/components/schemas/Metadata'
         _links:
           $ref: '#/components/schemas/Links'
-    ExecutionReceipt:
+    Links:
       type: object
-      required:
-      - executor_id
-      - result_id
-      - executor_signature
-      - _expandable
       properties:
-        executor_id:
-          description: Node ID of the execution node who produced the receipt.
-          $ref: '#/components/schemas/Identifier'
-        result_id:
-          $ref: '#/components/schemas/Identifier'
-        spocks:
-          type: array
-          items:
-            type: string
-            format: byte
-        executor_signature:
+        _self:
           type: string
-          format: byte
-        execution_result:
-          $ref: '#/components/schemas/ExecutionResult'
-        _expandable:
-          type: object
-          properties:
-            execution_result:
-              type: string
-              format: uri
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     Metadata:
       description: Contains data about the node's state at the time of the request.
       type: object
       properties:
         executor_metadata:
           $ref: '#/components/schemas/ExecutorMetadata'
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
   responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     404NotFound:
       description: Not Found
       content:
@@ -235,39 +272,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    expandParam:
-      description: A comma-separated list indicating which properties of the content to expand.
-      name: expand
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        uniqueItems: true
-      explode: false
-      style: form
-      required: false
-    selectParam:
-      description: A comma-separated list indicating which properties of the content to return.
-      name: select
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        uniqueItems: true
-      explode: false
-      style: form
-      required: false
 externalDocs:
   description: Find out more about the Access API
   url: https://docs.onflow.org/access-api/

@@ -1,17 +1,7 @@
 {
   "provider": "flow-blockchain",
   "sources": [
-    "flow-blockchain-accounts-api-openapi.yml",
-    "flow-blockchain-blocks-api-openapi.yml",
-    "flow-blockchain-collections-api-openapi.yml",
-    "flow-blockchain-events-api-openapi.yml",
-    "flow-blockchain-execution-receipts-api-openapi.yml",
-    "flow-blockchain-execution-results-api-openapi.yml",
-    "flow-blockchain-network-api-openapi.yml",
-    "flow-blockchain-nodeversioninfo-api-openapi.yml",
-    "flow-blockchain-scripts-api-openapi.yml",
-    "flow-blockchain-subscribe-events-api-openapi.yml",
-    "flow-blockchain-transactions-api-openapi.yml"
+    "_original/access.yaml"
   ],
   "outputs": [
     "flow-blockchain-accounts-api-openapi.yml",
@@ -29,6 +19,33 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "access.yaml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "access.yaml: declared missing tag: Accounts",
+    "access.yaml: declared missing tag: Blocks",
+    "access.yaml: declared missing tag: Collections",
+    "access.yaml: declared missing tag: Events",
+    "access.yaml: declared missing tag: Execution Receipts",
+    "access.yaml: declared missing tag: Execution Results",
+    "access.yaml: declared missing tag: Network",
+    "access.yaml: declared missing tag: NodeVersionInfo",
+    "access.yaml: declared missing tag: Scripts",
+    "access.yaml: declared missing tag: Subscribe events",
+    "access.yaml: declared missing tag: Transactions",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "flow-blockchain-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-execution-receipts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-execution-results-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-network-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-nodeversioninfo-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-scripts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-subscribe-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flow-blockchain-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

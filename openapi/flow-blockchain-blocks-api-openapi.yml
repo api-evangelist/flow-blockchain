@@ -1,7 +1,7 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Access Accounts Blocks API
+  title: Access Blocks API
 servers:
 - url: https://rest-testnet.onflow.org/v1
   description: Flow Testnet
@@ -57,9 +57,11 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getBlocks
+      x-operation-id-source: derived
   /blocks/{id}:
     get:
-      summary: Get Blocks by ID.
+      summary: Get Blocks by ID
       description: Get a block data or list of blocks by the provided ID or list of IDs.
       tags:
       - Blocks
@@ -93,9 +95,11 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getBlocksById
+      x-operation-id-source: derived
   /blocks/{id}/payload:
     get:
-      summary: Get Block Payload by Block ID.
+      summary: Get Block Payload by Block ID
       description: Get a block payload data by the provided block ID.
       tags:
       - Blocks
@@ -122,15 +126,93 @@ paths:
           $ref: '#/components/responses/404NotFound'
         '500':
           $ref: '#/components/responses/500InternalServerError'
+      operationId: getBlocksByIdPayload
+      x-operation-id-source: derived
 components:
   schemas:
-    BlockStatus:
+    EventType:
+      description: The qualified event type.
       type: string
-      description: This value indicates the status of a block.
-      enum:
-      - BLOCK_UNKNOWN
-      - BLOCK_FINALIZED
-      - BLOCK_SEALED
+    AggregatedSignature:
+      type: object
+      required:
+      - verifier_signatures
+      - signer_ids
+      properties:
+        verifier_signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signature'
+          minItems: 1
+          uniqueItems: true
+        signer_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+          minItems: 1
+          uniqueItems: true
+    BlockHeight:
+      oneOf:
+      - type: string
+        format: uint64
+      - type: string
+        enum:
+        - final
+        - sealed
+    CollectionGuarantee:
+      type: object
+      required:
+      - collection_id
+      - signer_ids
+      - signature
+      - reference_block_id
+      - cluster_chain_id
+      properties:
+        collection_id:
+          $ref: '#/components/schemas/Identifier'
+        signer_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+          minItems: 1
+          uniqueItems: true
+        signature:
+          $ref: '#/components/schemas/Signature'
+        reference_block_id:
+          $ref: '#/components/schemas/Identifier'
+        cluster_chain_id:
+          type: string
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
+    BlockPayload:
+      type: object
+      required:
+      - collection_guarantees
+      - block_seals
+      properties:
+        collection_guarantees:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionGuarantee'
+          uniqueItems: true
+        block_seals:
+          type: array
+          items:
+            $ref: '#/components/schemas/BlockSeal'
+          uniqueItems: true
+    Links:
+      type: object
+      properties:
+        _self:
+          type: string
+    StateCommitment:
+      description: The root hash of the state tree.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
     ExecutionResult:
       type: object
       required:
@@ -157,85 +239,6 @@ components:
           $ref: '#/components/schemas/Metadata'
         _links:
           $ref: '#/components/schemas/Links'
-    StateCommitment:
-      description: The root hash of the state tree.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    Block:
-      type: object
-      required:
-      - header
-      - block_status
-      properties:
-        header:
-          $ref: '#/components/schemas/BlockHeader'
-        payload:
-          $ref: '#/components/schemas/BlockPayload'
-        execution_result:
-          $ref: '#/components/schemas/ExecutionResult'
-        _expandable:
-          type: object
-          properties:
-            payload:
-              type: string
-            execution_result:
-              type: string
-              format: uri
-        _links:
-          $ref: '#/components/schemas/Links'
-        block_status:
-          $ref: '#/components/schemas/BlockStatus'
-    Event:
-      type: object
-      required:
-      - type
-      - transaction_id
-      - transaction_index
-      - event_index
-      - payload
-      properties:
-        type:
-          $ref: '#/components/schemas/EventType'
-        transaction_id:
-          $ref: '#/components/schemas/Identifier'
-        transaction_index:
-          type: string
-          format: uint64
-        event_index:
-          type: string
-          format: uint64
-        payload:
-          type: string
-          format: byte
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-    Links:
-      type: object
-      properties:
-        _self:
-          type: string
-    BlockHeight:
-      oneOf:
-      - type: string
-        format: uint64
-      - type: string
-        enum:
-        - final
-        - sealed
     BlockHeader:
       type: object
       required:
@@ -277,9 +280,30 @@ components:
             $ref: '#/components/schemas/AggregatedSignature'
           minItems: 1
           uniqueItems: true
-    EventType:
-      description: The qualified event type.
-      type: string
+    Block:
+      type: object
+      required:
+      - header
+      - block_status
+      properties:
+        header:
+          $ref: '#/components/schemas/BlockHeader'
+        payload:
+          $ref: '#/components/schemas/BlockPayload'
+        execution_result:
+          $ref: '#/components/schemas/ExecutionResult'
+        _expandable:
+          type: object
+          properties:
+            payload:
+              type: string
+            execution_result:
+              type: string
+              format: uri
+        _links:
+          $ref: '#/components/schemas/Links'
+        block_status:
+          $ref: '#/components/schemas/BlockStatus'
     Chunk:
       type: object
       required:
@@ -315,10 +339,42 @@ components:
         total_computation_used:
           type: string
           format: uint64
+    Event:
+      type: object
+      required:
+      - type
+      - transaction_id
+      - transaction_index
+      - event_index
+      - payload
+      properties:
+        type:
+          $ref: '#/components/schemas/EventType'
+        transaction_id:
+          $ref: '#/components/schemas/Identifier'
+        transaction_index:
+          type: string
+          format: uint64
+        event_index:
+          type: string
+          format: uint64
+        payload:
+          type: string
+          format: byte
     Signature:
       description: A variable length signature.
       type: string
       format: byte
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
     Error:
       type: object
       properties:
@@ -326,102 +382,20 @@ components:
           type: integer
         message:
           type: string
-    CollectionGuarantee:
-      type: object
-      required:
-      - collection_id
-      - signer_ids
-      - signature
-      - reference_block_id
-      - cluster_chain_id
-      properties:
-        collection_id:
-          $ref: '#/components/schemas/Identifier'
-        signer_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-          minItems: 1
-          uniqueItems: true
-        signature:
-          $ref: '#/components/schemas/Signature'
-        reference_block_id:
-          $ref: '#/components/schemas/Identifier'
-        cluster_chain_id:
-          type: string
-    AggregatedSignature:
-      type: object
-      required:
-      - verifier_signatures
-      - signer_ids
-      properties:
-        verifier_signatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signature'
-          minItems: 1
-          uniqueItems: true
-        signer_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-          minItems: 1
-          uniqueItems: true
     Metadata:
       description: Contains data about the node's state at the time of the request.
       type: object
       properties:
         executor_metadata:
           $ref: '#/components/schemas/ExecutorMetadata'
-    BlockPayload:
-      type: object
-      required:
-      - collection_guarantees
-      - block_seals
-      properties:
-        collection_guarantees:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionGuarantee'
-          uniqueItems: true
-        block_seals:
-          type: array
-          items:
-            $ref: '#/components/schemas/BlockSeal'
-          uniqueItems: true
-  responses:
-    500InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    BlockStatus:
+      type: string
+      description: This value indicates the status of a block.
+      enum:
+      - BLOCK_UNKNOWN
+      - BLOCK_FINALIZED
+      - BLOCK_SEALED
   parameters:
-    expandParam:
-      description: A comma-separated list indicating which properties of the content to expand.
-      name: expand
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        uniqueItems: true
-      explode: false
-      style: form
-      required: false
     selectParam:
       description: A comma-separated list indicating which properties of the content to return.
       name: select
@@ -435,6 +409,38 @@ components:
       explode: false
       style: form
       required: false
+    expandParam:
+      description: A comma-separated list indicating which properties of the content to expand.
+      name: expand
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      explode: false
+      style: form
+      required: false
+  responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
 externalDocs:
   description: Find out more about the Access API
   url: https://docs.onflow.org/access-api/
