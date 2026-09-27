@@ -65,18 +65,6 @@ components:
           format: uint64
         compatible_range:
           $ref: '#/components/schemas/CompatibleRange'
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
     CompatibleRange:
       type: object
       description: A compatible version range.
@@ -88,7 +76,25 @@ components:
           type: string
         end_height:
           type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
   responses:
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     400BadRequest:
       description: Bad Request
       content:
@@ -97,12 +103,6 @@ components:
             $ref: '#/components/schemas/Error'
     404NotFound:
       description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Internal Server Error
       content:
         application/json:
           schema:

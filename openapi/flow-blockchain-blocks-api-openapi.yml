@@ -130,63 +130,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EventType:
-      description: The qualified event type.
-      type: string
-    AggregatedSignature:
-      type: object
-      required:
-      - verifier_signatures
-      - signer_ids
-      properties:
-        verifier_signatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Signature'
-          minItems: 1
-          uniqueItems: true
-        signer_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-          minItems: 1
-          uniqueItems: true
-    BlockHeight:
-      oneOf:
-      - type: string
-        format: uint64
-      - type: string
-        enum:
-        - final
-        - sealed
-    CollectionGuarantee:
-      type: object
-      required:
-      - collection_id
-      - signer_ids
-      - signature
-      - reference_block_id
-      - cluster_chain_id
-      properties:
-        collection_id:
-          $ref: '#/components/schemas/Identifier'
-        signer_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-          minItems: 1
-          uniqueItems: true
-        signature:
-          $ref: '#/components/schemas/Signature'
-        reference_block_id:
-          $ref: '#/components/schemas/Identifier'
-        cluster_chain_id:
-          type: string
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
     BlockPayload:
       type: object
       required:
@@ -208,11 +151,62 @@ components:
       properties:
         _self:
           type: string
-    StateCommitment:
-      description: The root hash of the state tree.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    BlockStatus:
       type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
+      description: This value indicates the status of a block.
+      enum:
+      - BLOCK_UNKNOWN
+      - BLOCK_FINALIZED
+      - BLOCK_SEALED
+    Event:
+      type: object
+      required:
+      - type
+      - transaction_id
+      - transaction_index
+      - event_index
+      - payload
+      properties:
+        type:
+          $ref: '#/components/schemas/EventType'
+        transaction_id:
+          $ref: '#/components/schemas/Identifier'
+        transaction_index:
+          type: string
+          format: uint64
+        event_index:
+          type: string
+          format: uint64
+        payload:
+          type: string
+          format: byte
+    Metadata:
+      description: Contains data about the node's state at the time of the request.
+      type: object
+      properties:
+        executor_metadata:
+          $ref: '#/components/schemas/ExecutorMetadata'
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+    Signature:
+      description: A variable length signature.
+      type: string
+      format: byte
     ExecutionResult:
       type: object
       required:
@@ -239,47 +233,6 @@ components:
           $ref: '#/components/schemas/Metadata'
         _links:
           $ref: '#/components/schemas/Links'
-    BlockHeader:
-      type: object
-      required:
-      - id
-      - parent_id
-      - height
-      - timestamp
-      - parent_voter_signature
-      properties:
-        id:
-          $ref: '#/components/schemas/Identifier'
-        parent_id:
-          $ref: '#/components/schemas/Identifier'
-        height:
-          type: string
-          format: uint64
-        timestamp:
-          type: string
-          format: date-time
-        parent_voter_signature:
-          $ref: '#/components/schemas/Signature'
-    BlockSeal:
-      type: object
-      required:
-      - block_id
-      - result_id
-      - final_state
-      - aggregated_approval_signatures
-      properties:
-        block_id:
-          $ref: '#/components/schemas/Identifier'
-        result_id:
-          $ref: '#/components/schemas/Identifier'
-        final_state:
-          $ref: '#/components/schemas/StateCommitment'
-        aggregated_approval_signatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregatedSignature'
-          minItems: 1
-          uniqueItems: true
     Block:
       type: object
       required:
@@ -304,6 +257,86 @@ components:
           $ref: '#/components/schemas/Links'
         block_status:
           $ref: '#/components/schemas/BlockStatus'
+    StateCommitment:
+      description: The root hash of the state tree.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
+    AggregatedSignature:
+      type: object
+      required:
+      - verifier_signatures
+      - signer_ids
+      properties:
+        verifier_signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Signature'
+          minItems: 1
+          uniqueItems: true
+        signer_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+          minItems: 1
+          uniqueItems: true
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
+    BlockSeal:
+      type: object
+      required:
+      - block_id
+      - result_id
+      - final_state
+      - aggregated_approval_signatures
+      properties:
+        block_id:
+          $ref: '#/components/schemas/Identifier'
+        result_id:
+          $ref: '#/components/schemas/Identifier'
+        final_state:
+          $ref: '#/components/schemas/StateCommitment'
+        aggregated_approval_signatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedSignature'
+          minItems: 1
+          uniqueItems: true
+    BlockHeader:
+      type: object
+      required:
+      - id
+      - parent_id
+      - height
+      - timestamp
+      - parent_voter_signature
+      properties:
+        id:
+          $ref: '#/components/schemas/Identifier'
+        parent_id:
+          $ref: '#/components/schemas/Identifier'
+        height:
+          type: string
+          format: uint64
+        timestamp:
+          type: string
+          format: date-time
+        parent_voter_signature:
+          $ref: '#/components/schemas/Signature'
+    EventType:
+      description: The qualified event type.
+      type: string
+    BlockHeight:
+      oneOf:
+      - type: string
+        format: uint64
+      - type: string
+        enum:
+        - final
+        - sealed
     Chunk:
       type: object
       required:
@@ -339,76 +372,49 @@ components:
         total_computation_used:
           type: string
           format: uint64
-    Event:
+    CollectionGuarantee:
       type: object
       required:
-      - type
-      - transaction_id
-      - transaction_index
-      - event_index
-      - payload
+      - collection_id
+      - signer_ids
+      - signature
+      - reference_block_id
+      - cluster_chain_id
       properties:
-        type:
-          $ref: '#/components/schemas/EventType'
-        transaction_id:
+        collection_id:
           $ref: '#/components/schemas/Identifier'
-        transaction_index:
-          type: string
-          format: uint64
-        event_index:
-          type: string
-          format: uint64
-        payload:
-          type: string
-          format: byte
-    Signature:
-      description: A variable length signature.
-      type: string
-      format: byte
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
+        signer_ids:
           type: array
           items:
             $ref: '#/components/schemas/Identifier'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
+          minItems: 1
+          uniqueItems: true
+        signature:
+          $ref: '#/components/schemas/Signature'
+        reference_block_id:
+          $ref: '#/components/schemas/Identifier'
+        cluster_chain_id:
           type: string
-    Metadata:
-      description: Contains data about the node's state at the time of the request.
-      type: object
-      properties:
-        executor_metadata:
-          $ref: '#/components/schemas/ExecutorMetadata'
-    BlockStatus:
-      type: string
-      description: This value indicates the status of a block.
-      enum:
-      - BLOCK_UNKNOWN
-      - BLOCK_FINALIZED
-      - BLOCK_SEALED
+  responses:
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    selectParam:
-      description: A comma-separated list indicating which properties of the content to return.
-      name: select
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        uniqueItems: true
-      explode: false
-      style: form
-      required: false
     expandParam:
       description: A comma-separated list indicating which properties of the content to expand.
       name: expand
@@ -422,25 +428,19 @@ components:
       explode: false
       style: form
       required: false
-  responses:
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    selectParam:
+      description: A comma-separated list indicating which properties of the content to return.
+      name: select
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      explode: false
+      style: form
+      required: false
 externalDocs:
   description: Find out more about the Access API
   url: https://docs.onflow.org/access-api/

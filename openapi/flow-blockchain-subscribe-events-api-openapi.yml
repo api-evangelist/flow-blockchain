@@ -93,22 +93,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BlockHeight:
-      oneOf:
-      - type: string
-        format: uint64
-      - type: string
-        enum:
-        - final
-        - sealed
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    EventType:
-      description: The qualified event type.
-      type: string
     Event:
       type: object
       required:
@@ -131,6 +115,22 @@ components:
         payload:
           type: string
           format: byte
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
+    EventType:
+      description: The qualified event type.
+      type: string
+    BlockHeight:
+      oneOf:
+      - type: string
+        format: uint64
+      - type: string
+        enum:
+        - final
+        - sealed
     Error:
       type: object
       properties:
@@ -161,17 +161,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    500InternalServerErrorWS:
-      description: 'Internal Server Error
-
-
-        As OpenAPI does not support WebSocket description, this error code (1011) is actually returned in a close message instead of (500).
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     503ServiceUnavailableWS:
       description: 'Service Unavailable
 
@@ -188,6 +177,17 @@ components:
 
 
         As OpenAPI does not support WebSocket description, this error code (1001) is actually returned in a close message instead of (408).
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerErrorWS:
+      description: 'Internal Server Error
+
+
+        As OpenAPI does not support WebSocket description, this error code (1011) is actually returned in a close message instead of (500).
 
         '
       content:
