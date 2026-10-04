@@ -74,23 +74,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Links:
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
+    Metadata:
+      description: Contains data about the node's state at the time of the request.
       type: object
       properties:
-        _self:
-          type: string
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
+        executor_metadata:
+          $ref: '#/components/schemas/ExecutorMetadata'
     BlockEvents:
       type: object
       properties:
@@ -131,6 +130,13 @@ components:
         payload:
           type: string
           format: byte
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     BlockHeight:
       oneOf:
       - type: string
@@ -142,23 +148,45 @@ components:
     EventType:
       description: The qualified event type.
       type: string
-    Metadata:
-      description: Contains data about the node's state at the time of the request.
+    Links:
       type: object
       properties:
-        executor_metadata:
-          $ref: '#/components/schemas/ExecutorMetadata'
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
+        _self:
+          type: string
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
+  responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    agreeingExecutorsCount:
+      description: A minimum number of execution receipts for the execution result.
+      name: agreeing_executors_count
+      in: query
+      allowEmptyValue: false
+      schema:
+        type: string
+        format: uint64
+      required: false
     requiredExecutorIds:
       description: A set of execution node IDs, one of which must have produced the execution result.
       name: required_executor_ids
@@ -171,6 +199,14 @@ components:
         uniqueItems: true
       explode: false
       style: form
+      required: false
+    includeExecutorMetadata:
+      description: Specifies whether or not to include the executor metadata in the response.
+      name: include_executor_metadata
+      in: query
+      allowEmptyValue: false
+      schema:
+        type: boolean
       required: false
     selectParam:
       description: A comma-separated list indicating which properties of the content to return.
@@ -185,42 +221,6 @@ components:
       explode: false
       style: form
       required: false
-    agreeingExecutorsCount:
-      description: A minimum number of execution receipts for the execution result.
-      name: agreeing_executors_count
-      in: query
-      allowEmptyValue: false
-      schema:
-        type: string
-        format: uint64
-      required: false
-    includeExecutorMetadata:
-      description: Specifies whether or not to include the executor metadata in the response.
-      name: include_executor_metadata
-      in: query
-      allowEmptyValue: false
-      schema:
-        type: boolean
-      required: false
-  responses:
-    500InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
 externalDocs:
   description: Find out more about the Access API
   url: https://docs.onflow.org/access-api/
