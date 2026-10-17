@@ -176,26 +176,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Metadata:
-      description: Contains data about the node's state at the time of the request.
-      type: object
-      properties:
-        executor_metadata:
-          $ref: '#/components/schemas/ExecutorMetadata'
     SigningAlgorithm:
       type: string
       enum:
       - BLSBLS12381
       - ECDSAP256
       - ECDSASecp256k1
-    HashingAlgorithm:
-      type: string
-      enum:
-      - SHA2_256
-      - SHA2_384
-      - SHA3_256
-      - SHA3_384
-      - KMAC128
+    Metadata:
+      description: Contains data about the node's state at the time of the request.
+      type: object
+      properties:
+        executor_metadata:
+          $ref: '#/components/schemas/ExecutorMetadata'
+    AccountBalance:
+      type: object
+      required:
+      - balance
+      properties:
+        balance:
+          type: string
+          format: uint64
+          description: Flow balance of the account.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
     BlockHeight:
       oneOf:
       - type: string
@@ -204,41 +207,21 @@ components:
         enum:
         - final
         - sealed
-    Account:
+    ExecutorMetadata:
       type: object
-      required:
-      - address
-      - balance
-      - _expandable
+      description: Contains data about the execution result used to serve the request.
       properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        balance:
-          type: string
-          format: uint64
-          description: Flow balance of the account.
-        keys:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
           type: array
           items:
-            $ref: '#/components/schemas/AccountPublicKey'
-          minItems: 1
-          uniqueItems: true
-        contracts:
-          type: object
-          additionalProperties:
-            type: string
-            format: byte
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        _expandable:
-          type: object
-          properties:
-            keys:
-              type: string
-            contracts:
-              type: string
-        _links:
-          $ref: '#/components/schemas/Links'
+            $ref: '#/components/schemas/Identifier'
+    Address:
+      description: The 8-byte address of an account.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{16}'
     AccountPublicKey:
       type: object
       required:
@@ -275,42 +258,19 @@ components:
           description: Flag indicating whether the key is active or not.
         metadata:
           $ref: '#/components/schemas/Metadata'
-    Address:
-      description: The 8-byte address of an account.
-      type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{16}'
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
     Links:
       type: object
       properties:
         _self:
           type: string
-    Identifier:
-      description: A 32-byte unique identifier for an entity.
+    HashingAlgorithm:
       type: string
-      format: hexadecimal
-      pattern: '[a-fA-F0-9]{64}'
-    AccountBalance:
-      type: object
-      required:
-      - balance
-      properties:
-        balance:
-          type: string
-          format: uint64
-          description: Flow balance of the account.
-        metadata:
-          $ref: '#/components/schemas/Metadata'
+      enum:
+      - SHA2_256
+      - SHA2_384
+      - SHA3_256
+      - SHA3_384
+      - KMAC128
     AccountPublicKeys:
       type: object
       required:
@@ -324,6 +284,41 @@ components:
           uniqueItems: true
         metadata:
           $ref: '#/components/schemas/Metadata'
+    Account:
+      type: object
+      required:
+      - address
+      - balance
+      - _expandable
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        balance:
+          type: string
+          format: uint64
+          description: Flow balance of the account.
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountPublicKey'
+          minItems: 1
+          uniqueItems: true
+        contracts:
+          type: object
+          additionalProperties:
+            type: string
+            format: byte
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        _expandable:
+          type: object
+          properties:
+            keys:
+              type: string
+            contracts:
+              type: string
+        _links:
+          $ref: '#/components/schemas/Links'
     Error:
       type: object
       properties:
@@ -331,15 +326,14 @@ components:
           type: integer
         message:
           type: string
+    Identifier:
+      description: A 32-byte unique identifier for an entity.
+      type: string
+      format: hexadecimal
+      pattern: '[a-fA-F0-9]{64}'
   responses:
     404NotFound:
       description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Internal Server Error
       content:
         application/json:
           schema:
@@ -350,16 +344,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    agreeingExecutorsCount:
-      description: A minimum number of execution receipts for the execution result.
-      name: agreeing_executors_count
-      in: query
-      allowEmptyValue: false
-      schema:
-        type: string
-        format: uint64
-      required: false
     selectParam:
       description: A comma-separated list indicating which properties of the content to return.
       name: select
@@ -373,14 +364,14 @@ components:
       explode: false
       style: form
       required: false
-    expandParam:
-      description: A comma-separated list indicating which properties of the content to expand.
-      name: expand
+    requiredExecutorIds:
+      description: A set of execution node IDs, one of which must have produced the execution result.
+      name: required_executor_ids
       in: query
       schema:
         type: array
         items:
-          type: string
+          $ref: '#/components/schemas/Identifier'
         minItems: 1
         uniqueItems: true
       explode: false
@@ -394,14 +385,23 @@ components:
       schema:
         type: boolean
       required: false
-    requiredExecutorIds:
-      description: A set of execution node IDs, one of which must have produced the execution result.
-      name: required_executor_ids
+    agreeingExecutorsCount:
+      description: A minimum number of execution receipts for the execution result.
+      name: agreeing_executors_count
+      in: query
+      allowEmptyValue: false
+      schema:
+        type: string
+        format: uint64
+      required: false
+    expandParam:
+      description: A comma-separated list indicating which properties of the content to expand.
+      name: expand
       in: query
       schema:
         type: array
         items:
-          $ref: '#/components/schemas/Identifier'
+          type: string
         minItems: 1
         uniqueItems: true
       explode: false

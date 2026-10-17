@@ -83,23 +83,26 @@ paths:
       operationId: getExecutionResultsById
       x-operation-id-source: derived
 components:
+  responses:
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-    Metadata:
-      description: Contains data about the node's state at the time of the request.
-      type: object
-      properties:
-        executor_metadata:
-          $ref: '#/components/schemas/ExecutorMetadata'
     ExecutionResult:
       type: object
       required:
@@ -126,6 +129,21 @@ components:
           $ref: '#/components/schemas/Metadata'
         _links:
           $ref: '#/components/schemas/Links'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    Links:
+      type: object
+      properties:
+        _self:
+          type: string
+    EventType:
+      description: The qualified event type.
+      type: string
     Event:
       type: object
       required:
@@ -148,6 +166,12 @@ components:
         payload:
           type: string
           format: byte
+    Metadata:
+      description: Contains data about the node's state at the time of the request.
+      type: object
+      properties:
+        executor_metadata:
+          $ref: '#/components/schemas/ExecutorMetadata'
     Chunk:
       type: object
       required:
@@ -183,45 +207,21 @@ components:
         total_computation_used:
           type: string
           format: uint64
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-    EventType:
-      description: The qualified event type.
-      type: string
-    Links:
-      type: object
-      properties:
-        _self:
-          type: string
     Identifier:
       description: A 32-byte unique identifier for an entity.
       type: string
       format: hexadecimal
       pattern: '[a-fA-F0-9]{64}'
-  responses:
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
+          $ref: '#/components/schemas/Identifier'
+        executor_ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifier'
   parameters:
     agreeingExecutorsCount:
       description: A minimum number of execution receipts for the execution result.
@@ -231,6 +231,19 @@ components:
       schema:
         type: string
         format: uint64
+      required: false
+    selectParam:
+      description: A comma-separated list indicating which properties of the content to return.
+      name: select
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        uniqueItems: true
+      explode: false
+      style: form
       required: false
     requiredExecutorIds:
       description: A set of execution node IDs, one of which must have produced the execution result.
@@ -252,19 +265,6 @@ components:
       allowEmptyValue: false
       schema:
         type: boolean
-      required: false
-    selectParam:
-      description: A comma-separated list indicating which properties of the content to return.
-      name: select
-      in: query
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        uniqueItems: true
-      explode: false
-      style: form
       required: false
 externalDocs:
   description: Find out more about the Access API

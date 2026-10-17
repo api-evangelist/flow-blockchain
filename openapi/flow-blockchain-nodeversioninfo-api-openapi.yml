@@ -33,6 +33,12 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     400BadRequest:
       description: Bad Request
       content:
@@ -45,23 +51,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    CompatibleRange:
+    Error:
       type: object
-      description: A compatible version range.
-      required:
-      - start_height
-      - end_height
       properties:
-        start_height:
-          type: string
-        end_height:
+        code:
+          type: integer
+        message:
           type: string
     NodeVersionInfo:
       type: object
@@ -95,12 +91,16 @@ components:
           format: uint64
         compatible_range:
           $ref: '#/components/schemas/CompatibleRange'
-    Error:
+    CompatibleRange:
       type: object
+      description: A compatible version range.
+      required:
+      - start_height
+      - end_height
       properties:
-        code:
-          type: integer
-        message:
+        start_height:
+          type: string
+        end_height:
           type: string
     Identifier:
       description: A 32-byte unique identifier for an entity.

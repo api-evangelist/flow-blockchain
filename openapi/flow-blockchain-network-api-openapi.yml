@@ -33,6 +33,12 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     400BadRequest:
       description: Bad Request
       content:
@@ -45,26 +51,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    NetworkParameters:
-      type: object
-      required:
-      - chain_id
-      properties:
-        chain_id:
-          type: string
     Error:
       type: object
       properties:
         code:
           type: integer
         message:
+          type: string
+    NetworkParameters:
+      type: object
+      required:
+      - chain_id
+      properties:
+        chain_id:
           type: string
 externalDocs:
   description: Find out more about the Access API

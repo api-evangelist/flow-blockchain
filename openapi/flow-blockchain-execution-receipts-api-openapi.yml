@@ -75,23 +75,26 @@ paths:
       operationId: getExecutionReceiptsResultsById
       x-operation-id-source: derived
 components:
+  responses:
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ExecutorMetadata:
-      type: object
-      description: Contains data about the execution result used to serve the request.
-      properties:
-        execution_result_id:
-          $ref: '#/components/schemas/Identifier'
-        executor_ids:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-    Metadata:
-      description: Contains data about the node's state at the time of the request.
-      type: object
-      properties:
-        executor_metadata:
-          $ref: '#/components/schemas/ExecutorMetadata'
     ExecutionResult:
       type: object
       required:
@@ -118,59 +121,37 @@ components:
           $ref: '#/components/schemas/Metadata'
         _links:
           $ref: '#/components/schemas/Links'
-    Event:
+    Metadata:
+      description: Contains data about the node's state at the time of the request.
       type: object
-      required:
-      - type
-      - transaction_id
-      - transaction_index
-      - event_index
-      - payload
       properties:
-        type:
-          $ref: '#/components/schemas/EventType'
-        transaction_id:
-          $ref: '#/components/schemas/Identifier'
-        transaction_index:
-          type: string
-          format: uint64
-        event_index:
-          type: string
-          format: uint64
-        payload:
-          type: string
-          format: byte
-    ExecutionReceipt:
+        executor_metadata:
+          $ref: '#/components/schemas/ExecutorMetadata'
+    Links:
       type: object
-      required:
-      - executor_id
-      - result_id
-      - executor_signature
-      - _expandable
       properties:
-        executor_id:
-          description: Node ID of the execution node who produced the receipt.
+        _self:
+          type: string
+    ExecutorMetadata:
+      type: object
+      description: Contains data about the execution result used to serve the request.
+      properties:
+        execution_result_id:
           $ref: '#/components/schemas/Identifier'
-        result_id:
-          $ref: '#/components/schemas/Identifier'
-        spocks:
+        executor_ids:
           type: array
           items:
-            type: string
-            format: byte
-        executor_signature:
+            $ref: '#/components/schemas/Identifier'
+    EventType:
+      description: The qualified event type.
+      type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
           type: string
-          format: byte
-        execution_result:
-          $ref: '#/components/schemas/ExecutionResult'
-        _expandable:
-          type: object
-          properties:
-            execution_result:
-              type: string
-              format: uri
-        metadata:
-          $ref: '#/components/schemas/Metadata'
     Chunk:
       type: object
       required:
@@ -206,45 +187,64 @@ components:
         total_computation_used:
           type: string
           format: uint64
-    Error:
+    ExecutionReceipt:
       type: object
+      required:
+      - executor_id
+      - result_id
+      - executor_signature
+      - _expandable
       properties:
-        code:
-          type: integer
-        message:
+        executor_id:
+          description: Node ID of the execution node who produced the receipt.
+          $ref: '#/components/schemas/Identifier'
+        result_id:
+          $ref: '#/components/schemas/Identifier'
+        spocks:
+          type: array
+          items:
+            type: string
+            format: byte
+        executor_signature:
           type: string
-    EventType:
-      description: The qualified event type.
-      type: string
-    Links:
+          format: byte
+        execution_result:
+          $ref: '#/components/schemas/ExecutionResult'
+        _expandable:
+          type: object
+          properties:
+            execution_result:
+              type: string
+              format: uri
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    Event:
       type: object
+      required:
+      - type
+      - transaction_id
+      - transaction_index
+      - event_index
+      - payload
       properties:
-        _self:
+        type:
+          $ref: '#/components/schemas/EventType'
+        transaction_id:
+          $ref: '#/components/schemas/Identifier'
+        transaction_index:
           type: string
+          format: uint64
+        event_index:
+          type: string
+          format: uint64
+        payload:
+          type: string
+          format: byte
     Identifier:
       description: A 32-byte unique identifier for an entity.
       type: string
       format: hexadecimal
       pattern: '[a-fA-F0-9]{64}'
-  responses:
-    400BadRequest:
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    404NotFound:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     selectParam:
       description: A comma-separated list indicating which properties of the content to return.
