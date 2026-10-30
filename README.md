@@ -1,4 +1,4 @@
-# Flow Blockchain
+# Flow
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,60 +64,165 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Flow is a developer-friendly Layer 1 proof-of-stake blockchain built for consumer applications, NFTs, games, AI agents, and DeFi at scale. The Flow REST API (Access API) enables developers to query accounts, blocks, collections, events, and transactions, execute Cadence scripts, and submit signed transactions to the network.
+Flow is a developer-friendly Layer 1 proof-of-stake blockchain built for consumer applications, NFTs, games, AI agents, and DeFi at scale. The Flow REST API (Access API) enables developers to query accounts, blocks, collections, events, and transactions, execute Cadence scripts, and submit signed transactions to the network. Flow supports both native Cadence smart contracts and EVM-compatible Solidity deployments.
 
-## API
+**Areas:** Blockchain · NFT · Games · DeFi · Layer 1 · Cadence · Smart Contracts · Web3
 
-- **Base URL (Mainnet):** `https://rest-mainnet.onflow.org/v1`
-- **Base URL (Testnet):** `https://rest-testnet.onflow.org/v1`
-- **Documentation:** https://developers.flow.com/http-api
-- **OpenAPI Spec:** https://raw.githubusercontent.com/onflow/flow/master/openapi/access.yaml
+## Flow on APIs.io
 
-## Endpoints
+Everything profiled for Flow is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/flow-blockchain/](https://apis.io/providers/flow-blockchain/)** — or go straight to one of the APIs or properties below.
 
-- `GET /blocks` — Query blocks by height range or list of heights
-- `GET /blocks/{id}` — Get blocks by ID
-- `GET /blocks/{id}/payload` — Get block payload by block ID
-- `GET /transactions/{id}` — Get a transaction by ID
-- `GET /transaction_results/{transaction_id}` — Get transaction result
-- `POST /transactions` — Submit a signed transaction
-- `GET /collections/{id}` — Get a collection by ID
-- `GET /execution_results` — Get execution results by block ID
-- `GET /execution_results/{id}` — Get execution result by ID
-- `GET /accounts/{address}` — Get account data by address
-- `GET /accounts/{address}/keys` — Get account keys
-- `GET /accounts/{address}/balance` — Get account balance
-- `POST /scripts` — Execute a read-only Cadence script
-- `GET /events` — Query on-chain events by type
-- `GET /subscribe_events` — WebSocket stream for event subscriptions
-- `GET /network/parameters` — Get network parameters
-- `GET /node_version_info` — Get node version information
+### APIs (11)
 
-## Authentication
+- [Flow Accounts API](https://apis.io/apis/flow-blockchain/flow-blockchain-accounts-api/) — The Accounts API from Flow — 4 operation(s) for accounts.
+- [Flow Blocks API](https://apis.io/apis/flow-blockchain/flow-blockchain-blocks-api/) — The Blocks API from Flow — 3 operation(s) for blocks.
+- [Flow Collections API](https://apis.io/apis/flow-blockchain/flow-blockchain-collections-api/) — The Collections API from Flow — 1 operation(s) for collections.
+- [Flow Events API](https://apis.io/apis/flow-blockchain/flow-blockchain-events-api/) — The Events API from Flow — 1 operation(s) for events.
+- [Flow Execution Receipts API](https://apis.io/apis/flow-blockchain/flow-blockchain-execution-receipts-api/) — The Execution Receipts API from Flow — 2 operation(s) for execution receipts.
+- [Flow Execution Results API](https://apis.io/apis/flow-blockchain/flow-blockchain-execution-results-api/) — The Execution Results API from Flow — 2 operation(s) for execution results.
+- [Flow Network API](https://apis.io/apis/flow-blockchain/flow-blockchain-network-api/) — The Network API from Flow — 1 operation(s) for network.
+- [Flow NodeVersionInfo API](https://apis.io/apis/flow-blockchain/flow-blockchain-nodeversioninfo-api/) — The NodeVersionInfo API from Flow — 1 operation(s) for nodeversioninfo.
+- [Flow Scripts API](https://apis.io/apis/flow-blockchain/flow-blockchain-scripts-api/) — The Scripts API from Flow — 1 operation(s) for scripts.
+- [Flow Subscribe events API](https://apis.io/apis/flow-blockchain/flow-blockchain-subscribe-events-api/) — The Subscribe events API from Flow — 1 operation(s) for subscribe events.
+- [Flow Transactions API](https://apis.io/apis/flow-blockchain/flow-blockchain-transactions-api/) — The Transactions API from Flow — 4 operation(s) for transactions.
 
-No authentication is required for the public community access nodes.
+### Published properties
 
-## Rate Limits
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Public access nodes enforce per-IP rate limits:
+#### Agentic access (1)
 
-| Endpoint | Limit (RPS) |
-|----------|-------------|
-| POST /transactions (SendTransaction) | 50 |
-| POST /scripts (ExecuteScript) | 5 |
-| GET /events | 30 |
-| Other GET requests | 100 |
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Exceeding limits returns a `ResourceExhausted` error.
+- [Flow Blockchain Agentic Access](https://apis.io/agentic-access/flow-blockchain/flow-blockchain-agentic-access/)
 
-## Pricing
+#### JSON Schema (4)
 
-API access via public community nodes is free. Transaction fees are paid in FLOW tokens based on compute units consumed. See [finops/finops.yml](finops/finops.yml) for details.
+The data models the API reads and writes.
 
-## Resources
+- [Account](https://apis.io/schemas/flow-blockchain/account/)
+- [Block](https://apis.io/schemas/flow-blockchain/block/)
+- [Event](https://apis.io/schemas/flow-blockchain/event/)
+- [Transaction](https://apis.io/schemas/flow-blockchain/transaction/)
 
-- [Developer Portal](https://developers.flow.com/)
-- [GitHub Organization](https://github.com/onflow)
-- [Flow CLI](https://developers.flow.com/tools/flow-cli)
-- [Discord Community](https://discord.gg/flow)
-- [Flow Explorer (Flowscan)](https://flowscan.org/)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [context Context](https://apis.io/jsonld/flow-blockchain/context/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Account](https://apis.io/examples/flow-blockchain/account/)
+- [Block](https://apis.io/examples/flow-blockchain/block/)
+- [Event](https://apis.io/examples/flow-blockchain/event/)
+- [Submit Transaction](https://apis.io/examples/flow-blockchain/submit-transaction/)
+- [Transaction](https://apis.io/examples/flow-blockchain/transaction/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Access Accounts API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-accounts-api/)
+- [Access Accounts Blocks API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-blocks-api/)
+- [Access Accounts Collections API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-collections-api/)
+- [Access Accounts Events API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-events-api/)
+- [Access Accounts Execution Receipts API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-execution-receipts-api/)
+- [Access Accounts Execution Results API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-execution-results-api/)
+- [Access Accounts Network API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-network-api/)
+- [Access Accounts NodeVersionInfo API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-nodeversioninfo-api/)
+- [Access Accounts Scripts API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-scripts-api/)
+- [Access Accounts Subscribe events API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-subscribe-events-api/)
+- [Access Accounts Transactions API](https://apis.io/collections/flow-blockchain/open-flow-blockchain-transactions-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Flow — jsonschema rules](https://apis.io/rules/flow-blockchain/flow-blockchain-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Flow Blockchain Domain Security](https://apis.io/security/flow-blockchain/flow-blockchain-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/flow-blockchain/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/flow-blockchain/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/flow-blockchain/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://flow.com)
+- [Blog](https://flow.com/blog)
+
+## API Evangelist rating
+
+**Kin Score 23.5** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 52.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/flow-blockchain/](https://apis.io/providers/flow-blockchain/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Flow: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/flow-blockchain/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
